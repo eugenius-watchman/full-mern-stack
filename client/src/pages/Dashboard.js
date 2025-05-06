@@ -29,7 +29,7 @@ const Dashboard = () => {
   // Fetch quotes from server
   async function fetchQuotes() {
     try {
-      const response = await fetch("http://localhost:1337/api/quote", {
+      const response = await fetch("http://localhost:1337/api/quotes", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -38,7 +38,9 @@ const Dashboard = () => {
         throw new Error("Failed to fetch quotes");
       }
       const data = await response.json();
-      setQuotes(data.quotes || []);
+      console.log("Full API response:", data); // Logging complete response
+
+      setQuotes(data.quotes || data || []);
       console.log(data);
     } catch (error) {
       console.error("Error fetching quote:", error);
@@ -57,7 +59,7 @@ const Dashboard = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:1337/api/quotes", {
+      const response = await fetch("http://localhost:1337/api/quote", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

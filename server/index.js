@@ -6,8 +6,11 @@ const cors = require("cors"); // Allowing requests from different domains
 const mongoose = require("mongoose"); // MongoDB helper
 
 // Import user model...blueprint for user data
-const User = require("./models/user.models");
 const jwt = require("jsonwebtoken"); // JWT library for secure token generation/verification
+
+const User = require("./models/user.models");
+const Quote = require("./models/quote.models");
+
 
 // middleware
 app.use(cors()); // Enable CORS
@@ -196,6 +199,46 @@ app.post("/api/login", async (req, res) => {
       status: "error",
       message: "Login failed",
     });
+  }
+});
+
+// GET all quotes
+app.get('/api/quotes', authenticateToken, async (req, res) => {
+  try {
+    const quotes = await Quote.find().populate('author', 'name email');
+    res.json({ quotes });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// POST a new quote
+app.post('/api/quotes', authenticateToken, async (req, res) => {
+  try {
+    const quote = new Quote({
+      text: req.body.text,
+      author: req.user.id // From the authenticated token
+    });
+    await quote.save();
+    res.status(201).json(quote);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+// Like a quote
+app.post('/api/quotes/:id/like', authenticateToken, async (req, res) => {
+  try {
+    const quote = await Quote.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { likes: 1 } }, // Increment likes by 1
+      { new: true }
+    ).populate('author', 'name');
+    
+    if (!quote) return res.status(404).json({ message: 'Quote not found' });
+    res.json(quote);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 });
 
