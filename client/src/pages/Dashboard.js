@@ -59,7 +59,7 @@ const Dashboard = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:1337/api/quote", {
+      const response = await fetch("http://localhost:1337/api/quotes", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
