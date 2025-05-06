@@ -1,0 +1,103 @@
+/* Dashboard.css */
+.dashboard-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+h1, h2 {
+  color: #2c3e50;
+  text-align: center;
+}
+
+.quote-form {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.quote-form textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.word-count {
+  text-align: right;
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.error-message {
+  color: #e74c3c;
+  margin-bottom: 10px;
+}
+
+.quote-form button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.quote-form button:hover {
+  background-color: #2980b9;
+}
+
+.quotes-list {
+  display: grid;
+  gap: 20px;
+}
+
+.quote-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.quote-text {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.quote-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quote-author {
+  color: #7f8c8d;
+  font-weight: bold;
+}
+
+.like-button {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.like-button:hover {
+  color: #c0392b;
+}
